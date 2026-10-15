@@ -264,6 +264,11 @@ def build_parser():
     parser.add_argument(
         "--vac-chunk-size", type=float, default=0.04, help="VAC sample size in seconds."
     )
+    parser.add_argument(
+        "--vac-threshold", type=float, default=0.5,
+        help="VAC speech-probability threshold (Silero, default 0.5). "
+             "Lower values keep quieter speech; higher values reject more background noise.",
+    )
 
     parser.add_argument(
         "--no-vad",

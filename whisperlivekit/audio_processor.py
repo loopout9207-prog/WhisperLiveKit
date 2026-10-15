@@ -142,11 +142,12 @@ class AudioProcessor:
         self.vac: Optional[FixedVADIterator] = None
 
         if self.args.vac:
+            vac_threshold = getattr(self.args, "vac_threshold", 0.5)
             if models.vac_session is not None:
                 vac_model = OnnxWrapper(session=models.vac_session)
-                self.vac = FixedVADIterator(vac_model)
+                self.vac = FixedVADIterator(vac_model, threshold=vac_threshold)
             else:
-                self.vac = FixedVADIterator(load_jit_vad())
+                self.vac = FixedVADIterator(load_jit_vad(), threshold=vac_threshold)
         self.audio_input = AudioInput(
             pcm_input=self.is_pcm_input, sample_rate=self.sample_rate, channels=self.channels,
             chunk_bytes=self.bytes_per_sec, max_chunk_bytes=self.max_bytes_per_sec,

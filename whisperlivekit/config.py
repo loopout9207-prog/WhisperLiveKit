@@ -70,6 +70,7 @@ class WhisperLiveKitConfig:
     alignatt_context: str = ""
     vac: bool = True
     vac_chunk_size: float = 0.04
+    vac_threshold: float = 0.5
     log_level: str = "DEBUG"
     ssl_certfile: Optional[str] = None
     ssl_keyfile: Optional[str] = None
